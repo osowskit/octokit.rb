@@ -34,7 +34,7 @@ module Octokit
       # @param number [Integer] The id of the pull request
       # @param id [Integer] The id of the pull request
       
-      def review_comments(repo, number id, options = {})
+      def review_comments(repo, number, id, options = {})
         options = ensure_api_media_type(:reviews, options)
         get "#{Repository.path repo}/pulls/#{number}/reviews/#{id}/comments", options
       end
@@ -55,7 +55,7 @@ module Octokit
       # @param repo [Integer, String, Hash, Repository] A GitHub repository
       # @param number [Integer] The number of the pull request
       #
-      def create_review(repo, number, body = nil, event, options = {})
+      def create_review(repo, number, event, body = nil, options = {})
         review = {
           :event  => event,
         }
@@ -69,7 +69,7 @@ module Octokit
       # @param number [Integer] The number of the pull request
       # @param id [Integer] The id of the review
       #
-      def submit_review(repo, number, id, body = nil, event, options = {})
+      def submit_review(repo, number, id, event, body = nil, options = {})
         review = {
           :event  => event,
         }
@@ -80,7 +80,7 @@ module Octokit
 
       def dismiss_review(repo, number, id, options = {})
         options = ensure_api_media_type(:reviews, options)
-        put "#{Repository.path repo}/pulls/#{number}/reviews/#{id}/dismissals", options)
+        put "#{Repository.path repo}/pulls/#{number}/reviews/#{id}/dismissals", options
       end
     end
   end
