@@ -78,8 +78,11 @@ module Octokit
         post "#{Repository.path repo}/pulls/#{number}/reviews/#{id}/events", options
       end
 
-      def dismiss_review(repo, number, id, options = {})
-        options = ensure_api_media_type(:reviews, options)
+      def dismiss_review(repo, number, id, message, options = {})
+        review = {
+          :message  => message,
+        }
+        options = ensure_api_media_type(:reviews, options.merge(review))
         put "#{Repository.path repo}/pulls/#{number}/reviews/#{id}/dismissals", options
       end
     end
